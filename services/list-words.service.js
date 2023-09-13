@@ -4,7 +4,6 @@ import { containsPartialWord } from './func/index.js';
  * 1) List Words Filtering
  */
 export const listWordsFiltering = async (req, res) => {
-  const listWordResult = [2, 2];
   const seedWords = fs.readFileSync('/Users/mzc01-sylee1274/Desktop/gitRepo/metafile_algo/services/process/awsSeedWords.json', 'utf-8');
   const parsedSeedWords = JSON.parse(seedWords)['seedWords'];
 
