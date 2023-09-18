@@ -2,6 +2,8 @@ import fs from 'fs';
 import { containsPartialWord } from './func/index.js';
 /**
  * 1) List Words Filtering
+ *
+ * TODO: sso - associated / no - notify 처럼 문자열이 포함돼 있어도 필터링이 되는 부분 제외시키기.
  */
 export const listWordsFiltering = async (req, res) => {
   const seedWords = fs.readFileSync('/Users/mzc01-sylee1274/Desktop/gitRepo/metafile_algo/services/process/awsSeedWords.json', 'utf-8');
@@ -23,7 +25,7 @@ export const listWordsFiltering = async (req, res) => {
   const listWordsResult = [];
 
   parsedCheckRulesList.forEach((checkRule, idx) => {
-    if (Object.keys(checkRule)[0] === 'No') {
+    if (Object.keys(checkRule)[0] === 'T4r') {
       if (checkRule['checkRuleType'] !== 'HYBRIXOPS') {
         checkRuleNamesArr.push({
           checkRuleName: checkRule['checkRuleName'].split('-').join(' '),
@@ -157,7 +159,8 @@ export const listWordsFiltering = async (req, res) => {
   finalListWordsResult.forEach((el) => {
     el['listWords__CheckRuleName'].forEach((e) => {
       if (Array.isArray(e['listWords'])) {
-        e['listWords'] = e['listWords'].join(',');
+        console.log(e['listWords']);
+        // e['listWords'] = e['listWords'].join(',');
       }
       resultw.push({
         checkRuleName: el['checkRuleName'],
@@ -203,8 +206,14 @@ export const listWordsFiltering = async (req, res) => {
       });
 
       reducedObj.forEach((d) => {
+        let noUndefined = d['listWords'].filter((e) => e !== undefined);
+
+        d['listWords'] = noUndefined;
+
         const noDupl = new Set(d['listWords']);
+
         const noDuplArr = [...noDupl];
+        console.log(noDuplArr);
         d['listWords'] = noDuplArr.join(',');
       });
 
