@@ -1,6 +1,5 @@
 import fs from 'fs';
 import { findMatchingWordsWithCheckRuleName } from './func/index.js';
-import path from 'path';
 
 /**
  * 2) Security Terms Filtering
@@ -23,11 +22,11 @@ export const securityTermsFiltering = async (req, res) => {
   const finalGoldData = [];
 
   parsedCheckRulesList.forEach((checkRule) => {
-    if (Object.keys(checkRule)[0] !== 'No') {
+    if (Object.keys(checkRule)[0] !== 'T4r') {
       securityTermsArr.push(checkRule['securityTerms List']);
     }
-    if (Object.keys(checkRule)[0] === 'No' && checkRule['<<list words in checkRuleName>>'] !== '') {
-      const listWords = checkRule['<<list words in checkRuleName>>'].split(',');
+    if (Object.keys(checkRule)[0] === 'T4r' && checkRule['<<list words in checkRuleName>> 1st Result'] !== '') {
+      const listWords = checkRule['<<list words in checkRuleName>> 1st Result'].split(',');
       const checkRuleName = checkRule['checkRuleName'];
       listWordWithCheckRuleNameArr.push({
         checkRuleName,
@@ -74,7 +73,6 @@ export const securityTermsFiltering = async (req, res) => {
 
   resultGoldData.forEach((data) => {
     const change = new Set(data['listWord']);
-    // console.log(data['listWord']);
     data['listWord'] = [...change];
   });
 
@@ -118,7 +116,5 @@ export const securityTermsFiltering = async (req, res) => {
     group['securityTerms'] = noDuplArr.join(',');
   });
 
-  return res.json({
-    result: finalResultGroups,
-  });
+  return res.json(finalResultGroups);
 };
