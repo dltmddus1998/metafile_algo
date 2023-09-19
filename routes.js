@@ -3,6 +3,9 @@ import { listWordsFiltering } from './services/list-words.service.js';
 import { securityTermsFiltering } from './services/security-terms.service.js';
 import { awsResource } from './services/aws-resource.service.js';
 import { crawling } from './services/crawling.service.js';
+import { ifApply } from './services/if-apply.service.js';
+import { filterSeverity } from './services/severity.service.js';
+import { securityTermCate } from './services/security-term-cate.service.js';
 
 export const router = express.Router();
 
@@ -26,3 +29,18 @@ router.get('/resource-type', awsResource);
  */
 
 router.get('/crawling', crawling);
+
+/**
+ * 5) IfApply | 연산
+ */
+router.get('/if-apply', ifApply);
+
+/**
+ * 6) severity
+ */
+router.get('/severity', filterSeverity);
+
+/**
+ * 7) security Term - category, csa mapping
+ */
+router.get('/st-category-csa', securityTermCate);
