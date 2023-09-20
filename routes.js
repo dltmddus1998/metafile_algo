@@ -6,6 +6,7 @@ import { crawling } from './services/crawling.service.js';
 import { ifApply } from './services/if-apply.service.js';
 import { filterSeverity } from './services/severity.service.js';
 import { securityTermCate } from './services/security-term-cate.service.js';
+import { securityTermKo } from './services/security-term-ko.service.js';
 
 export const router = express.Router();
 
@@ -44,3 +45,8 @@ router.get('/severity', filterSeverity);
  * 7) security Term - category, csa mapping
  */
 router.get('/st-category-csa', securityTermCate);
+
+/**
+ * 8) security term - Ko ver.
+ */
+router.get('/st-ko', securityTermKo);

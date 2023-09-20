@@ -65,7 +65,7 @@ export const securityTermCate = async (req, res) => {
     }
   });
 
-  const mappedArr = [mappedObject];
+  // const mappedArr = [mappedObject];
 
   const mappedResult = Object.keys(mappedObject).map((key, idx) => {
     return {
