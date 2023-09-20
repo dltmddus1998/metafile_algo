@@ -13,6 +13,17 @@ export const findMatchingWordsWithCheckRuleName = (listWords, securityTermsArr, 
   if (matchingWords.length > 0) return matchingWords;
 };
 
+export const matchExactly = (inputString, targetWords) => {
+  if (inputString && targetWords.length) {
+    for (const targetWord of targetWords) {
+      if (inputString === targetWord) {
+        return true;
+      }
+    }
+    return false;
+  }
+};
+
 export const containsPartial = (inputString, targetWords) => {
   const words = inputString.split(' ');
 
